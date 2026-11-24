@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eros Academy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#09090a;--sf:#141416;--sf2:#1d1d20;--bd:#2a2a2e;--tx:#f5f5f6;--mu:#8d8d95;--ac:#f5f5f6;--on:#09090a;--sh:0 10px 30px rgba(0,0,0,.45);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+:root[data-theme="light"]{--bg:#f2f2f3;--sf:#fff;--sf2:#ebebed;--bd:#dcdce0;--tx:#111113;--mu:#6c6c74;--ac:#111113;--on:#fff;--sh:0 10px 30px rgba(0,0,0,.08);color-scheme:light}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,.cd,.big{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+main{max-width:860px;margin:0 auto;padding:18px 16px calc(100px + env(safe-area-inset-bottom,0px))}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:.06em;margin-bottom:18px}
+.brand svg{width:36px;height:36px}.brand small{display:block;font:600 .6rem Inter,sans-serif;letter-spacing:.18em;color:var(--mu)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:24px;padding:20px;box-shadow:var(--sh);margin-bottom:14px;animation:up .4s both}
+.eye{font:600 .7rem Inter,sans-serif;letter-spacing:.2em;color:var(--mu);text-transform:uppercase;margin-bottom:8px}
+.mu{color:var(--mu)}
+.hero{background:linear-gradient(160deg,var(--sf2),var(--sf))}
+.hero h1{font-size:clamp(2.4rem,9vw,3.6rem);margin:2px 0 14px}
+.cd{font-size:5.5rem;font-weight:800;line-height:.9}
+.row{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.bar{height:8px;border-radius:9px;background:var(--sf2);overflow:hidden;margin-top:14px}.bar div{height:100%;background:var(--ac);border-radius:9px;transition:width .8s}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.tile{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:16px;animation:up .4s both}
+.tile b{display:block;font:800 2.1rem "Barlow Condensed",sans-serif;line-height:1.1}
+.tile span{font-size:.75rem;color:var(--mu);display:flex;gap:6px;align-items:center}
+h2{font-size:1.5rem;margin:22px 0 12px}
+.sessions{display:grid;gap:12px}
+.sc{background:var(--sf);border:1px solid var(--bd);border-radius:22px;padding:18px;animation:up .4s both;transition:transform .2s,border-color .2s}
+.sc:hover{border-color:var(--mu)}.sc.done{border-color:var(--ac)}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.hh{font:800 1.6rem "Barlow Condensed",sans-serif;letter-spacing:.05em}
+.pill{font-size:.7rem;font-weight:700;padding:4px 11px;border-radius:99px;background:var(--sf2);color:var(--mu)}.pill.ok{background:var(--ac);color:var(--on)}
+.sc h3{font-size:1.4rem}.sc p{margin:4px 0 10px;color:var(--mu)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:14px;border:1px solid var(--bd);background:var(--sf2);font-weight:600;font-size:.9rem;transition:transform .15s,opacity .2s}
+.btn:active{transform:scale(.95)}.btn.pri{background:var(--ac);color:var(--on);border-color:var(--ac)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.big{width:100%;padding:15px;font-size:1rem;margin-top:6px}
+.btn.danger{border-color:#7f1d1d;color:#fca5a5}
+.sc .btn{width:100%;margin-top:4px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--mu);font-weight:600;margin-bottom:12px}
+.warn{background:var(--sf2);border-radius:14px;padding:12px 14px;font-size:.85rem;color:var(--mu);margin-top:12px}.warn b{color:var(--tx)}
+.ex{display:flex;gap:14px;background:var(--sf);border:1px solid var(--bd);border-radius:22px;padding:16px;margin-bottom:12px;animation:up .4s both}
+.ex.ok{border-color:var(--ac)}
+.fig{width:84px;flex:none;background:var(--sf2);border-radius:16px;display:grid;place-items:center;align-self:flex-start;aspect-ratio:1;padding:6px}
+.fig svg{width:100%;height:100%}
+.exb{flex:1;min-width:0}.exb h3{font-size:1.25rem;margin-bottom:8px}.exb p{margin:6px 0;font-size:.88rem}.sf{color:var(--mu)}.sf b{color:var(--tx)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{display:inline-flex;gap:5px;align-items:center;font-size:.75rem;background:var(--sf2);padding:4px 10px;border-radius:99px}.chips svg{width:13px;height:13px}
+.tmr{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.tmr .btn{padding:9px 14px}
+.tm{font:800 2rem "Barlow Condensed",sans-serif;min-width:70px}
+@media(max-width:480px){.ex{flex-direction:column}.fig{width:100%;aspect-ratio:2/1}.fig svg{width:auto}}
+.exercise-media{width:150px;min-width:150px;flex:none;align-self:flex-start;background:var(--sf2);border:1px solid var(--bd);border-radius:16px;overflow:hidden}
+.exercise-media img{display:block;width:100%;height:132px;object-fit:cover;background:var(--sf2)}
+.exercise-media .photo-credit{display:block;padding:6px 8px;font-size:.65rem;color:var(--mu);text-align:center}
+.exercise-media .photo-credit a{text-decoration:underline;text-underline-offset:2px}
+.exercise-media.img-error{display:grid;place-items:center;min-height:132px;padding:12px;text-align:center;color:var(--mu);font-size:.75rem}
+@media(max-width:480px){.exercise-media{width:100%;min-width:0}.exercise-media img{height:210px;object-fit:contain}.exercise-media .photo-credit{text-align:left}}
+
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal .h{text-align:center;font-size:.7rem;color:var(--mu);font-weight:600}
+.cell{aspect-ratio:1;border-radius:14px;border:1.5px dashed var(--bd);background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-weight:700;position:relative;transition:transform .15s}
+.cell:active{transform:scale(.92)}
+.cell.full{background:var(--ac);color:var(--on);border:1.5px solid var(--ac)}
+.cell.part{border:1.5px solid var(--mu);background:var(--sf2)}
+.cell.fut{opacity:.4;border-style:solid}
+.cell.today{outline:2px solid var(--ac);outline-offset:2px}
+.cell.sel{box-shadow:0 0 0 4px var(--bd)}
+.dots{display:flex;gap:3px}.dots i{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.25}.dots i.on{opacity:1}
+.cell em{position:absolute;top:-7px;font:700 .5rem Inter;font-style:normal;background:var(--ac);color:var(--on);padding:1px 6px;border-radius:99px;letter-spacing:.06em}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:.75rem;color:var(--mu);margin-top:14px}
+.goal{text-align:center;padding:26px;background:linear-gradient(160deg,var(--sf2),var(--sf))}.goal .i{width:34px;height:34px}.goal h2{margin:8px 0 2px;font-size:2rem}
+.dr{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--bd)}
+.chart{display:flex;align-items:flex-end;gap:4px;height:150px;margin-top:10px}
+.chart div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.6rem;color:var(--mu);gap:4px}
+.chart i{width:100%;background:var(--ac);border-radius:6px 6px 2px 2px;min-height:3px;transition:height .7s}.chart i.z{background:var(--bd)}
+.empty{text-align:center;color:var(--mu);padding:24px 10px}
+label{display:block;font-size:.75rem;color:var(--mu);font-weight:600;margin:12px 0 6px}
+input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--bd);background:var(--sf2);outline:0}input:focus,textarea:focus{border-color:var(--ac)}
+textarea{min-height:110px;resize:vertical;line-height:1.45}
+nav.bot{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(6,1fr);background:color-mix(in srgb,var(--sf) 92%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--bd);padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+nav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.6rem;font-weight:600;color:var(--mu);padding:6px 0;border-radius:12px;transition:color .2s}
+nav a.on{color:var(--tx)}nav a.on svg{transform:translateY(-2px) scale(1.1)}
+@media(min-width:900px){nav.bot{top:0;right:auto;bottom:0;width:230px;grid-template-columns:1fr;grid-auto-rows:min-content;align-content:start;gap:4px;border-top:0;border-right:1px solid var(--bd);padding:90px 14px 14px}
+nav a{flex-direction:row;gap:12px;font-size:.9rem;padding:12px 14px}nav a.on{background:var(--sf2)}
+main{margin-left:230px;max-width:none;padding:28px 40px 40px}main>*{max-width:820px}.tiles{grid-template-columns:repeat(4,1fr)}.sessions{grid-template-columns:repeat(3,1fr)}
+.brand.side{position:fixed;left:20px;top:22px;margin:0;z-index:6}}
+@media(max-width:899px){.brand.side{display:none}}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:20;display:grid;place-items:center;text-align:center;padding:24px;animation:fade .3s both;color:#f5f5f6}
+.ov .big{font-size:3.4rem;font-weight:800;margin:10px 0}.ov .i{width:88px;height:88px;animation:pulse 1.2s infinite;fill:#f5f5f6}
+.ov .btn{margin-top:20px;background:#f5f5f6;color:#09090a}
+.cf{position:fixed;top:-20px;width:8px;height:14px;animation:fall 3s linear infinite;z-index:21}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ac);color:var(--on);padding:10px 18px;border-radius:99px;font-weight:600;font-size:.85rem;opacity:0;transition:all .3s;z-index:9;pointer-events:none}.toast.on{opacity:1;transform:translate(-50%,0)}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}}@keyframes pulse{50%{transform:scale(1.15)}}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== GOLPES ===== */
+.golpe-grid{display:grid;gap:12px}
+.golpe-card{background:var(--sf);border:1px solid var(--bd);border-radius:22px;padding:18px;display:flex;gap:16px;align-items:flex-start;animation:up .4s both;transition:border-color .2s,transform .15s;cursor:pointer}
+.golpe-card:hover{border-color:var(--mu)}.golpe-card:active{transform:scale(.98)}
+.golpe-num{flex:none;width:64px;height:64px;border-radius:18px;background:var(--ac);color:var(--on);display:grid;place-items:center;font:800 1.8rem "Barlow Condensed",sans-serif;line-height:1}
+.golpe-body{flex:1;min-width:0}
+.golpe-body h3{font-size:1.35rem;margin-bottom:6px}
+.golpe-body p{margin:0;font-size:.88rem;color:var(--mu);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.golpe-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.golpe-actions .btn{padding:8px 14px;font-size:.85rem}
+.video-wrap{background:var(--sf2);border-radius:16px;overflow:hidden;margin:14px 0;border:1px solid var(--bd)}
+.video-wrap video{display:block;width:100%;max-height:360px;background:#000}
+.file-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.file-row input[type=file]{display:none}
+.file-name{font-size:.85rem;color:var(--mu);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.golpe-detail-num{font:800 4rem "Barlow Condensed",sans-serif;line-height:1;margin:4px 0 8px}
+.form-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.form-actions .btn{flex:1;min-width:120px}
+.confirm-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:25;display:grid;place-items:center;padding:24px;animation:fade .2s both}
+.confirm-box{background:var(--sf);border:1px solid var(--bd);border-radius:24px;padding:24px;max-width:360px;width:100%;text-align:center;box-shadow:var(--sh)}
+.confirm-box h3{font-size:1.5rem;margin-bottom:8px}
+.confirm-box p{color:var(--mu);margin:0 0 18px;font-size:.95rem}
+.confirm-box .row{justify-content:center;gap:10px}
+@media(max-width:480px){.golpe-card{flex-direction:column;align-items:stretch}.golpe-num{width:56px;height:56px;font-size:1.5rem}}
+
+/* ===== EROS IA ===== */
+.ai-fab{position:fixed;right:18px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:15;border:0;border-radius:999px;background:var(--tx);color:var(--bg);padding:13px 18px;display:flex;align-items:center;gap:9px;font-weight:800;box-shadow:0 8px 28px rgba(0,0,0,.35);cursor:pointer}
+.ai-fab svg{width:20px;height:20px}
+.ai-panel{position:fixed;z-index:30;right:18px;bottom:calc(154px + env(safe-area-inset-bottom,0px));width:min(410px,calc(100vw - 24px));height:min(610px,calc(100dvh - 190px));background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:24px;box-shadow:0 18px 60px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden}
+.ai-panel[hidden]{display:none}
+.ai-head{display:flex;align-items:center;gap:10px;padding:15px 16px;border-bottom:1px solid var(--bd);background:var(--sf2)}
+.ai-avatar{width:38px;height:38px;border-radius:13px;background:var(--tx);color:var(--bg);display:grid;place-items:center;font-size:1.1rem;font-weight:900}
+.ai-head-copy{flex:1;min-width:0}.ai-head-copy b{display:block;font-weight:800}.ai-head-copy small{color:var(--mu);font-size:.72rem}
+.ai-head button{border:0;background:transparent;color:var(--tx);padding:7px;border-radius:10px}
+.ai-messages{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ai-msg{max-width:88%;padding:11px 13px;border-radius:16px;line-height:1.45;font-size:.88rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.ai-msg.user{align-self:flex-end;background:var(--tx);color:var(--bg);border-bottom-right-radius:5px}
+.ai-msg.assistant{align-self:flex-start;background:var(--sf2);border:1px solid var(--bd);border-bottom-left-radius:5px}
+.ai-msg.system{align-self:center;background:transparent;color:var(--mu);font-size:.75rem;text-align:center}
+.ai-compose{padding:11px;border-top:1px solid var(--bd);display:flex;gap:7px;align-items:flex-end;background:var(--sf)}
+.ai-compose textarea{min-height:44px;max-height:110px;resize:none;border-radius:15px;padding:11px 12px;flex:1;font-size:.88rem}
+.ai-compose button{width:43px;height:43px;flex:none;border:1px solid var(--bd);background:var(--sf2);border-radius:14px;display:grid;place-items:center}
+.ai-compose button.send{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.ai-compose button:disabled{opacity:.45}
+.ai-config-note{padding:10px 12px;margin:0 12px 10px;background:var(--sf2);border:1px solid var(--bd);border-radius:12px;color:var(--mu);font-size:.75rem}
+.ai-config-note button{border:0;background:none;color:var(--tx);font-weight:800;text-decoration:underline;padding:0}
+.ai-panel .ai-typing{color:var(--mu);font-size:.78rem;padding:0 14px 8px}
+@media(max-width:600px){
+ .ai-fab{right:12px;bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+ .ai-panel{left:8px;right:8px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:auto;height:min(72dvh,620px);border-radius:22px}
+}
+.cell.rest{border:1.5px solid #777;background:var(--sf2)}
+
+</style>
+</head>
+<body>
+<div class="brand side" id="side"></div>
+<main id="app"></main>
+<nav class="bot" id="nav"></nav>
+<div class="toast" id="toast"></div>
+<button class="ai-fab" id="ai-fab" type="button" aria-label="Abrir Eros IA"><span>✦</span> Eros IA</button>
+<section class="ai-panel" id="ai-panel" hidden aria-label="Chat Eros IA">
+  <header class="ai-head">
+    <div class="ai-avatar">E</div>
+    <div class="ai-head-copy"><b>Eros IA</b><small>Assistente do seu Eros Academy</small></div>
+    <button type="button" id="ai-config" aria-label="Configurar conexão" title="Configurar conexão">⚙</button>
+    <button type="button" id="ai-close" aria-label="Fechar chat">✕</button>
+  </header>
+  <div class="ai-messages" id="ai-messages"></div>
+  <div class="ai-config-note" id="ai-config-note" hidden>Conecte o servidor da IA para começar. <button type="button" id="ai-config-inline">Configurar agora</button></div>
+  <div class="ai-typing" id="ai-typing" hidden>O Eros IA está pensando…</div>
+  <form class="ai-compose" id="ai-form">
+    <textarea id="ai-input" rows="1" placeholder="Peça para organizar seus treinos..." aria-label="Mensagem"></textarea>
+    <button type="button" id="ai-mic" title="Falar" aria-label="Falar">🎙</button>
+    <button class="send" type="submit" id="ai-send" title="Enviar" aria-label="Enviar">➤</button>
+  </form>
+</section>
+<script>
+const K='eros:v1';
+const D0={p:{name:'Eros Dimitri',mod:'Karatê Shotokan',goal:'Campeonato de Karatê',start:'2026-11-23',end:'2026-12-13',champ:'2026-12-14'},log:{},ex:{},theme:'dark',golpes:[],aiRestDays:{},aiSessionOverrides:{}};
+let S=(()=>{try{const r=JSON.parse(localStorage.getItem(K));if(r&&r.p)return Object.assign({},D0,r,{p:Object.assign({},D0.p,r.p),golpes:Array.isArray(r.golpes)?r.golpes:[]})}catch(e){}return JSON.parse(JSON.stringify(D0))})();
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const IC={home:'<path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',act:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',cal:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/>',chart:'<path d="M18 20V10M12 20V4M6 20v-6"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',check:'<path d="M20 6 9 17l-5-5"/>',play:'<path d="M6 3l14 9-14 9z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',back:'<path d="M15 18l-6-6 6-6"/>',trophy:'<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.7V17c0 .6-.5 1-1 1.2-1.2.5-2 2-2 3.8M14 14.7V17c0 .6.5 1 1 1.2 1.2.5 2 2 2 3.8M18 2H6v7a6 6 0 0 0 12 0z"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>',fist:'<path d="M7 11v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-8"/><path d="M7 11V8a2 2 0 0 1 2-2h1"/><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><path d="M14 6v2"/><path d="M17 8v3"/><path d="M7 11h10"/>',plus:'<path d="M12 5v14M5 12h14"/>',trash:'<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/>',edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',video:'<path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/>'};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24">${IC[n]}</svg>`;
+const LOGO='<svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="currentColor"/><path d="M14 11h14M14 20h10M14 29h14M14 11v18" stroke="var(--on)" stroke-width="4.2" stroke-linecap="round" fill="none"/></svg>';
+const SES={
+m:{n:'Manhã',h:'06:00',t:'Mobilidade matinal',f:'Mobilidade geral e preparação das pernas.',ex:[
+['Mobilidade de quadril','q',60,'2 séries de 10 círculos por lado','Em pé, apoiado em uma parede, eleve o joelho à frente e faça círculos amplos e lentos com a perna, sem balançar o tronco.','Amplitude confortável. Não force o fim do movimento.'],
+['Alongamento de posteriores da coxa','p',40,'2 × 40 s por perna','Sentado, com uma perna estendida e a outra dobrada. Incline o tronco com a coluna longa até sentir tensão leve atrás da coxa.','Tensão leve, nunca dor. Não arredonde a lombar para ir mais longe.'],
+['Alongamento de quadríceps','c',40,'2 × 40 s por perna','Em pé, com apoio, leve o calcanhar em direção ao glúteo segurando o pé, joelhos próximos e quadril firme.','Não torça o joelho. Se doer no joelho, reduza a flexão.'],
+['Mobilidade de tornozelos','t',60,'2 × 12 repetições por lado','Em pé, com um pé à frente, leve o joelho sobre os dedos mantendo o calcanhar no chão e volte.','Calcanhar sempre no chão. Pare se sentir pinçamento na frente do tornozelo.'],
+['Alongamento de panturrilhas','pa',40,'2 × 40 s por perna','Mãos na parede, uma perna atrás com o calcanhar no chão. Incline o corpo à frente até sentir a panturrilha alongar.','Sem quicar. Tensão moderada, sem dor.']]},
+t:{n:'Tarde',h:'13:00',t:'Flexibilidade e mobilidade',f:'Flexibilidade e amplitude de movimento.',ex:[
+['Alongamento borboleta','a',60,'2 × 45 a 60 s','Sentado, com as solas dos pés unidas e os joelhos para os lados. Mantenha a coluna alta e incline levemente o tronco.','Não pressione os joelhos com as mãos. Pare se sentir dor na virilha ou nos joelhos.'],
+['Alongamento de adutores','a',40,'2 × 40 s por lado','Em afundo lateral raso, com a perna estendida ao lado e o pé apontando para cima, quadril levemente para trás.','Raso e controlado, sem quicar. Volte devagar.'],
+['Alongamento de posteriores','p',40,'2 × 40 s por perna','Deitado de costas, eleve uma perna segurando atrás da coxa (ou com uma faixa), joelho levemente flexionado.','O joelho pode ficar dobrado. Sem dor atrás do joelho.'],
+['Alongamento de flexores do quadril','q',40,'2 × 40 s por lado','Em avanço, com o joelho de trás no chão (use uma almofada). Leve o quadril um pouco à frente, tronco alto.','Contraia o abdômen para não arquear a lombar.'],
+['Mobilidade de quadril','q',60,'2 × 8 repetições por lado','Em quatro apoios, gire o joelho para fora e para dentro em círculos lentos, sem mover a lombar.','Movimento lento e confortável. Reduza a amplitude se sentir pinçamento.']]},
+n:{n:'Noite',h:'20:00',t:'Preparação para o karatê',f:'Recuperação e mobilidade após o dia.',ex:[
+['Alongamento leve de quadríceps','c',30,'1 a 2 × 30 s por perna','Em pé, com apoio, segure o pé atrás e leve o calcanhar em direção ao glúteo com suavidade.','Intensidade leve, é recuperação. Sem dor no joelho.'],
+['Alongamento de posteriores','p',30,'1 a 2 × 30 s por perna','Sentado, com uma perna estendida, incline o tronco com a coluna longa até sentir tensão leve.','Pare antes de qualquer dor. Não curve a lombar.'],
+['Alongamento de panturrilhas','pa',30,'1 a 2 × 30 s por perna','Mãos na parede, uma perna atrás com o calcanhar no chão, inclinando o corpo à frente.','Sem quicar. Tensão leve.'],
+['Mobilidade de quadril','q',60,'1 × 10 círculos por lado','Em pé, com apoio, faça círculos lentos com o joelho elevado, nos dois sentidos.','Movimento suave, sem forçar amplitude.'],
+['Respiração e relaxamento','r',120,'1 × 2 minutos','Deitado de costas, inspire pelo nariz por 4 s e solte pela boca por 6 s, relaxando ombros e mandíbula.','Respire sem forçar. Se sentir tontura, volte ao ritmo normal.']]}};
+
+const PHOTO={
+  hip:{src:'https://commons.wikimedia.org/wiki/Special:FilePath/Stretching%20exercise.jpg',page:'https://commons.wikimedia.org/wiki/File:Stretching_exercise.jpg',credit:'Douglaseru · CC BY-SA 4.0'},
+  ham:{src:'https://commons.wikimedia.org/wiki/Special:FilePath/Woman%20with%20curly%20hair%20stretching%20her%20hamstrings%20on%20a%20yoga%20mat.jpg',page:'https://commons.wikimedia.org/wiki/File:Woman_with_curly_hair_stretching_her_hamstrings_on_a_yoga_mat.jpg',credit:'Shixart1985 · Wikimedia Commons'},
+  quad:{src:'https://commons.wikimedia.org/wiki/Special:FilePath/Abdominal%20stretch.jpg',page:'https://commons.wikimedia.org/wiki/File:Abdominal_stretch.jpg',credit:'Tyler Read · Wikimedia Commons'},
+  ankle:{src:'https://commons.wikimedia.org/wiki/Special:FilePath/A%20person%20performs%20a%20foot%20stretch.jpg',page:'https://commons.wikimedia.org/wiki/File:A_person_performs_a_foot_stretch.jpg',credit:'Wikimedia Commons'},
+  calf:{src:'https://commons.wikimedia.org/wiki/Special:FilePath/The%20Calf%20Stretch%20110402-A-XD329-017.jpg',page:'https://commons.wikimedia.org/wiki/File:The_Calf_Stretch_110402-A-XD329-017.jpg',credit:'Sgt. Brian Scott · Domínio público (EUA)'},
+  adductor:{src:'https://commons.wikimedia.org/wiki/Special:FilePath/Wshamstringstretch.jpg',page:'https://commons.wikimedia.org/wiki/File:Wshamstringstretch.jpg',credit:'Richardkiwi · Wikimedia Commons'},
+  relax:{src:'https://commons.wikimedia.org/wiki/Special:FilePath/Person%20stretching%20indoors%20in%20a%20comfortable%20space.jpg',page:'https://commons.wikimedia.org/wiki/File:Person_stretching_indoors_in_a_comfortable_space.jpg',credit:'Shixart1985 · Wikimedia Commons'}
+};
+function photoFor(name,key){
+  if(name.toLowerCase().includes('borboleta')||name.toLowerCase().includes('adutores'))return PHOTO.adductor;
+  if(name.toLowerCase().includes('posterior'))return PHOTO.ham;
+  if(name.toLowerCase().includes('quadríceps'))return PHOTO.quad;
+  if(name.toLowerCase().includes('panturrilha'))return PHOTO.calf;
+  if(name.toLowerCase().includes('tornozelo'))return PHOTO.ankle;
+  if(name.toLowerCase().includes('respiração'))return PHOTO.relax;
+  return PHOTO.hip;
+}
+function photoMarkup(name,key){
+  const p=photoFor(name,key);
+  return `<div class="exercise-media"><img src="${p.src}" alt="Fotografia demonstrativa: ${name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('img-error');this.remove()"><span class="photo-credit"><a href="${p.page}" target="_blank" rel="noopener">Fonte da imagem</a> · ${p.credit}</span></div>`;
+}
+
+const KS=['m','t','n'];
+const P=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=()=>ymd(new Date());
+const diff=(a,b)=>Math.round((P(b)-P(a))/864e5);
+const dl=(s,o)=>P(s).toLocaleDateString('pt-BR',o);
+const hm=t=>new Date(t).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+const mmss=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const cnt=d=>Object.keys(S.log[d]||{}).length;
+const days=()=>{const a=[];for(let d=P(S.p.start);ymd(d)<=S.p.end;d.setDate(d.getDate()+1))a.push(ymd(d));return a};
+const inRange=t=>t>=S.p.start&&t<=S.p.end;
+function stats(){
+  const t=today(),ds=days();let cur=0,best=0,run=0,full=0,ses=0,el=0;
+  let expected=0;for(const d of ds){ses+=cnt(d);if(d>t)continue;el++;if(!isRestDay(d))expected+=3;if(isRestDay(d)||cnt(d)===3){full++;run++;best=Math.max(best,run)}else if(d!==t)run=0}
+  cur=run;return{cur,best,full,ses,el,expected,total:ds.length,cons:expected?Math.min(100,Math.round(ses/expected*100)):100,prog:ds.length?Math.round(el/ds.length*100):0}
+}
+const dstat=d=>isRestDay(d)?'rest':d>today()?'fut':cnt(d)===3?'full':cnt(d)>0?'part':'pend';
+let T=null,SEL=null,toastT,rst=false;
+let pendingVideoFile=null;
+let videoObjectUrls={};
+
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove('on'),2200)}
+
+const IDB_NAME='eros-golpes-db';
+const IDB_STORE='videos';
+let idb=null;
+function openIDB(){
+  return new Promise((resolve,reject)=>{
+    if(idb){resolve(idb);return}
+    const req=indexedDB.open(IDB_NAME,1);
+    req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(IDB_STORE))db.createObjectStore(IDB_STORE)};
+    req.onsuccess=()=>{idb=req.result;resolve(idb)};
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function idbPut(id,blob){
+  const db=await openIDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(IDB_STORE,'readwrite');
+    tx.objectStore(IDB_STORE).put(blob,id);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+async function idbGet(id){
+  const db=await openIDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(IDB_STORE,'readonly');
+    const req=tx.objectStore(IDB_STORE).get(id);
+    req.onsuccess=()=>resolve(req.result||null);
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function idbDelete(id){
+  const db=await openIDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(IDB_STORE,'readwrite');
+    tx.objectStore(IDB_STORE).delete(id);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+function revokeVideoUrl(id){
+  if(videoObjectUrls[id]){URL.revokeObjectURL(videoObjectUrls[id]);delete videoObjectUrls[id]}
+}
+async function getVideoUrl(id){
+  if(videoObjectUrls[id])return videoObjectUrls[id];
+  try{
+    const blob=await idbGet(id);
+    if(!blob)return null;
+    const url=URL.createObjectURL(blob);
+    videoObjectUrls[id]=url;
+    return url;
+  }catch(e){return null}
+}
+
+function fig(z){
+  const Z={q:[50,60],p:[46,76],c:[54,76],t:[45,99],pa:[45,91],a:[50,72],r:[50,36]},[x,y]=Z[z];
+  return `<svg viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><circle cx="50" cy="13" r="8"/><path d="M50 22v38M50 30l-16 14M50 30l16 14M50 60l-10 22 -2 22M50 60l10 22 2 22" opacity=".6"/><circle cx="${x}" cy="${y}" r="9" fill="currentColor" stroke="none" opacity=".35"/><circle cx="${x}" cy="${y}" r="3" fill="currentColor" stroke="none"/></svg>`;
+}
+const NAV=[['inicio','Início','home'],['treinos','Treinos','act'],['golpes','Golpes','fist'],['calendario','Calendário','cal'],['estatisticas','Estatísticas','chart'],['perfil','Perfil','user']];
+function route(){const h=location.hash.slice(1)||'inicio';return h}
+function render(){
+  document.documentElement.dataset.theme=S.theme;
+  const r=route(),base=r.startsWith('sessao-')?'treinos':r.startsWith('golpe')?'golpes':r;
+  document.getElementById('nav').innerHTML=NAV.map(n=>`<a href="#${n[0]}" class="${base===n[0]?'on':''}">${ic(n[2])}${n[1]}</a>`).join('');
+  document.getElementById('side').innerHTML=LOGO+'<div>EROS ACADEMY</div>';
+  const m=r.match(/^sessao-([mtn])$/);
+  const gView=r.match(/^golpe-([a-z0-9]+)$/i);
+  const gEdit=r.match(/^golpe-edit-([a-z0-9]+)$/i);
+  const V={inicio:home,treinos:train,calendario:calv,estatisticas:statv,perfil:prof,golpes:golpesView};
+  let html;
+  if(m)html=sess(m[1]);
+  else if(r==='golpe-novo')html=golpeForm(null);
+  else if(gEdit)html=golpeForm(gEdit[1]);
+  else if(gView)html=golpeDetail(gView[1]);
+  else html=(V[r]||home)();
+  document.getElementById('app').innerHTML=`<div class="brand">${LOGO}<div>EROS ACADEMY<small>DISCIPLINA. EVOLUÇÃO. VITÓRIA.</small></div></div>`+html;
+  if(gView){
+    const id=gView[1];
+    const g=S.golpes.find(x=>x.id===id);
+    if(g&&g.hasVideo){
+      getVideoUrl(id).then(url=>{
+        const el=document.getElementById('golpe-video');
+        if(el&&url){el.src=url;el.load()}
+        else if(el)el.parentElement.innerHTML='<p class="mu" style="padding:20px;text-align:center">Não foi possível carregar o vídeo.</p>';
+      });
+    }
+  }
+}
+
+function getSes(k,date=today()){
+  const base=SES[k];
+  const ov=(S.aiSessionOverrides||{})[date]?.[k];
+  if(!ov)return base;
+  const all=Object.values(SES).flatMap(s=>s.ex);
+  const ex=(ov.exerciseNames||[]).map(n=>all.find(e=>e[0].toLocaleLowerCase('pt-BR')===String(n).toLocaleLowerCase('pt-BR'))).filter(Boolean);
+  return {...base,t:ov.title||base.t,f:ov.description||base.f,ex:ex.length?ex:base.ex};
+}
+function isRestDay(date=today()){return !!(S.aiRestDays||{})[date]}
+
+function scard(k){
+  const s=getSes(k,today()),t=today(),d=!!(S.log[t]||{})[k];
+  return `<div class="sc ${d?'done':''}"><div class="sh"><span class="hh">${s.h}</span><span class="pill ${d?'ok':''}">${d?'Concluída':'Pendente'}</span></div><h3>${s.n}</h3><p>${s.t}</p><div class="chips"><span>${s.ex.length} exercícios</span></div><a class="btn ${d?'':'pri'}" href="#sessao-${k}" style="margin-top:12px">${ic('play')} ${d?'Rever sessão':'Iniciar sessão'}</a></div>`;
+}
+function home(){
+  const t=today(),st=stats(),n=cnt(t),left=diff(t,S.p.champ),first=S.p.name.split(' ')[0];
+  const cd=left>0?`<div class="cd">${left}</div><div class="mu" style="padding-bottom:8px">${left===1?'dia':'dias'} para o campeonato<br>${dl(S.p.champ,{day:'2-digit',month:'2-digit',year:'numeric'})}</div>`:left===0?`<div class="cd" style="font-size:3.4rem">HOJE É O DIA!</div>`:`<div class="mu">Campeonato realizado em ${dl(S.p.champ,{day:'2-digit',month:'2-digit',year:'numeric'})}</div>`;
+  const pre=t<S.p.start?`<p class="mu">A preparação começa em ${diff(t,S.p.start)} dia(s).</p>`:'';
+  const dayN=Math.min(Math.max(diff(S.p.start,t)+1,0),st.total);
+  return `<div class="card hero"><div class="eye">${dl(t,{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div><h1>Olá, ${first}!</h1><div class="eye" style="color:var(--tx)">RUMO AO CAMPEONATO</div><div class="row">${cd}</div>${pre}<div class="bar"><div style="width:${st.prog}%"></div></div><div class="mu" style="font-size:.8rem;margin-top:8px">Preparação: dia ${dayN} de ${st.total} · ${st.prog}%</div></div>
+  <div class="tiles"><div class="tile"><span>${ic('flame')} Ofensiva atual</span><b>${st.cur} ${st.cur===1?'dia':'dias'}</b></div><div class="tile"><span>${ic('trophy')} Maior ofensiva</span><b>${st.best} ${st.best===1?'dia':'dias'}</b></div><div class="tile"><span>${ic('check')} Sessões hoje</span><b>${isRestDay(t)?'Folga':(inRange(t)?n:0)+'/3'}</b></div><div class="tile"><span>${ic('target')} Conclusão diária</span><b>${isRestDay(t)?'—':(inRange(t)?Math.round(n/3*100):0)+'%'}</b></div></div>
+  <h2>Sessões de hoje</h2>${isRestDay(t)?'<div class="card empty"><b>Hoje é dia de folga.</b><p class="mu">A programação foi atualizada pelo Eros IA. Aproveite para descansar.</p></div>':(inRange(t)?'':'<div class="card empty">Hoje está fora do período de preparação. As sessões ficam abertas para consulta, mas o registro só vale de '+dl(S.p.start,{day:'2-digit',month:'2-digit'})+' a '+dl(S.p.end,{day:'2-digit',month:'2-digit'})+'.</div>')+'<div class="sessions">'+KS.map(scard).join('')+'</div>'}`;
+}
+function train(){
+  return `<h2 style="margin-top:0;font-size:2.2rem">Treinamentos</h2><p class="mu">Mobilidade e flexibilidade progressivas para o karatê. As sessões agora mostram fotografias reais de referência. Aqueça antes, respeite o limite do corpo e pare diante de qualquer dor.</p>`+(isRestDay()?'<div class="card empty"><b>Hoje está marcado como dia de folga.</b><p class="mu">A programação de hoje foi pausada.</p></div>':KS.map(k=>{const s=getSes(k,today()),d=!!(S.log[today()]||{})[k];return `<a class="card" href="#sessao-${k}" style="display:block"><div class="sh"><span class="hh">SESSÃO ${KS.indexOf(k)+1} · ${s.n.toUpperCase()} · ${s.h}</span><span class="pill ${d?'ok':''}">${d?'Concluída hoje':'Pendente'}</span></div><h3>${s.t}</h3><p class="mu">${s.f}</p><div class="chips">${s.ex.map(e=>`<span>${e[0]}</span>`).join('')}</div></a>`}).join(''));
+}
+function sess(k){
+  const s=getSes(k,today()),t=today(),can=inRange(t),done=!!(S.log[t]||{})[k],ck=S.ex[t+k]||[];
+  return `<a class="back" href="#treinos">${ic('back')} Treinos</a><div class="card"><div class="eye">${s.h} · ${s.n}</div><h1 style="font-size:2.4rem">${s.t}</h1><p class="mu">${s.f}</p><div class="warn"><b>Antes de começar:</b> aqueça 2 a 3 minutos com caminhada leve ou marcha parada. Alongue até sentir tensão leve, nunca dor. Se sentir dor, interrompa o exercício. As fotografias são referências visuais; confira também as instruções escritas e respeite os limites do corpo.</div></div>`+
+  s.ex.map((e,i)=>{const run=T&&T.k===k&&T.i===i,dn=ck.includes(i);
+    return `<div class="ex ${dn?'ok':''}">${photoMarkup(e[0],e[1])}<div class="exb"><h3>${i+1}. ${e[0]}</h3><div class="chips"><span>${ic('clock')} ${mmss(e[2])}</span><span>${e[3]}</span></div><p>${e[4]}</p><p class="sf"><b>Segurança:</b> ${e[5]}</p><div class="tmr">${run?`<b class="tm" id="tm">${mmss(T.left)}</b><button class="btn" data-a="tp">${T.run?'Pausar':'Retomar'}</button><button class="btn" data-a="tx">Parar</button>`:`<button class="btn" data-a="ts" data-i="${i}">${ic('play')} Cronômetro</button>`}<button class="btn ${dn?'pri':''}" data-a="ex" data-k="${k}" data-i="${i}" ${can?'':'disabled'}>${ic('check')} ${dn?'Feito':'Marcar feito'}</button></div></div></div>`}).join('')+
+  `<button class="btn pri big" data-a="fin" data-k="${k}" ${done||!can||ck.length<s.ex.length?'disabled':''}>${done?'Sessão concluída ✓':!can?'Registro só no período da preparação':ck.length<s.ex.length?`Marque os exercícios (${ck.length}/${s.ex.length})`:'Concluir sessão'}</button>`;
+}
+function calv(){
+  const t=today(),ds=days();SEL=SEL||(inRange(t)?t:S.p.start);
+  const lead=(P(S.p.start).getDay()+6)%7,wk=['S','T','Q','Q','S','S','D'];
+  const cells=ds.map(d=>{const s=isRestDay(d)?'rest':dstat(d),c=cnt(d);return `<button class="cell ${s} ${d===t?'today':''} ${d===SEL?'sel':''}" data-a="day" data-d="${d}">${d===S.p.end?'<em>ÚLTIMO</em>':''}${P(d).getDate()}<span class="dots">${[0,1,2].map(i=>`<i class="${i<c?'on':''}"></i>`).join('')}</span></button>`}).join('');
+  const sd=S.log[SEL]||{},fut=SEL>t;
+  return `<h2 style="margin-top:0;font-size:2.2rem">Calendário</h2><div class="card"><div class="cal">${wk.map(w=>`<div class="h">${w}</div>`).join('')}${'<div></div>'.repeat(lead)}${cells}</div><div class="leg"><span>● Completo</span><span>◐ Parcial</span><span>○ Pendente</span><span>▫ Aguardando</span></div></div>
+  <div class="card"><div class="eye">${dl(SEL,{weekday:'long',day:'numeric',month:'long'})}</div><h3 style="font-size:1.6rem">${isRestDay(SEL)?'Dia de folga':fut?'Aguardando':cnt(SEL)===3?'Dia completo':cnt(SEL)?'Parcialmente concluído':'Nenhuma sessão registrada'}</h3>${KS.map(k=>`<div class="dr"><div><b>${SES[k].n}</b> <span class="mu">${SES[k].h}</span></div><span class="pill ${sd[k]?'ok':''}">${sd[k]?'Concluída às '+hm(sd[k]):isRestDay(SEL)?'Folga':fut?'Aguardando':'Pendente'}</span></div>`).join('')}${SEL===t&&inRange(t)?'<a class="btn pri big" href="#treinos">Ir para os treinos</a>':''}</div>
+  <div class="card goal">${ic('trophy')}<h2>${dl(S.p.champ,{day:'numeric',month:'long'})}</h2><div class="big" style="font-size:1.6rem;font-weight:800">DIA DO CAMPEONATO!</div><p class="mu" style="margin:6px 0 0">O grande objetivo. A preparação termina em ${dl(S.p.end,{day:'2-digit',month:'2-digit'})}.</p></div>`;
+}
+function statv(){
+  const st=stats(),t=today(),ds=days();
+  const bars=ds.map(d=>{const c=cnt(d),f=d>t;return `<div><i class="${c?'':'z'}" style="height:${f?3:Math.max(c/3*100,2)}%;${f?'opacity:.4':''}"></i>${P(d).getDate()}</div>`}).join('');
+  return `<h2 style="margin-top:0;font-size:2.2rem">Desempenho</h2><div class="tiles"><div class="tile"><span>Consistência</span><b>${st.cons}%</b></div><div class="tile"><span>Sessões realizadas</span><b>${st.ses}/${st.expected}</b></div><div class="tile"><span>Dias completos</span><b>${st.full}/${st.total}</b></div><div class="tile"><span>${ic('flame')} Maior sequência</span><b>${st.best}</b></div></div>
+  <div class="card"><div class="eye">Progresso da preparação</div><b class="big" style="font-size:2.4rem">${st.prog}%</b><div class="bar"><div style="width:${st.prog}%"></div></div>
+  <div class="card"><div class="eye">Sessões por dia</div>${st.ses?`<div class="chart">${bars}</div>`:'<div class="empty">Ainda não há sessões registradas. Conclua a primeira sessão para ver sua evolução aqui.</div>'}</div>`;
+}
+function prof(){
+  return `<h2 style="margin-top:0;font-size:2.2rem">Perfil do atleta</h2><div class="card"><label>Nome</label><input id="f-name" value="${S.p.name}"><label>Modalidade</label><input id="f-mod" value="${S.p.mod}"><label>Objetivo</label><input id="f-goal" value="${S.p.goal}"><label>Início da preparação</label><input type="date" id="f-start" value="${S.p.start}"><label>Último dia de preparação</label><input type="date" id="f-end" value="${S.p.end}"><label>Data do campeonato</label><input type="date" id="f-champ" value="${S.p.champ}"><button class="btn pri big" data-a="psave" style="margin-top:16px">Salvar perfil</button></div>
+  <div class="card"><div class="eye">Tema</div><div class="row"><button class="btn ${S.theme==='dark'?'pri':''}" data-a="th" data-v="dark">Preto</button><button class="btn ${S.theme==='light'?'pri':''}" data-a="th" data-v="light">Claro</button></div></div>
+  <div class="card"><div class="eye">Dados</div><p class="mu" style="margin-top:0">Apaga todos os registros de sessões e a ofensiva. O perfil e os golpes são mantidos.</p><button class="btn" data-a="wipe">${rst?'Toque de novo para confirmar':'Apagar registros'}</button></div>`;
+}
+
+function sortedGolpes(){
+  return [...S.golpes].sort((a,b)=>Number(a.num)-Number(b.num));
+}
+function golpesView(){
+  const list=sortedGolpes();
+  let cards='';
+  if(!list.length){
+    cards=`<div class="card empty"><p>Nenhum golpe cadastrado ainda.</p><p style="margin-top:8px">Adicione o primeiro golpe para montar sua biblioteca de luta.</p></div>`;
+  }else{
+    cards=`<div class="golpe-grid">${list.map(g=>{
+      const desc=(g.desc||'').trim();
+      const short=desc.length>90?desc.slice(0,90)+'…':desc||'Sem descrição';
+      return `<div class="golpe-card" data-a="golpe-open" data-id="${g.id}">
+        <div class="golpe-num">${g.num}</div>
+        <div class="golpe-body">
+          <h3>${esc(g.name)}</h3>
+          <p>${esc(short)}</p>
+          <div class="golpe-actions">
+            ${g.hasVideo?`<button class="btn" data-a="golpe-open" data-id="${g.id}">${ic('video')} Ver vídeo</button>`:''}
+            <button class="btn" data-a="golpe-open" data-id="${g.id}">Abrir</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+  return `<h2 style="margin-top:0;font-size:2.2rem">Golpes</h2>
+  <p class="mu">Biblioteca pessoal de golpes de karatê. Seu pai pode consultar o número e falar só o número durante a luta.</p>
+  <button class="btn pri big" data-a="golpe-novo" style="margin-bottom:16px">${ic('plus')} Adicionar golpe</button>
+  ${cards}`;
+}
+function golpeForm(editId){
+  const isEdit=!!editId;
+  const g=isEdit?S.golpes.find(x=>x.id===editId):null;
+  if(isEdit&&!g)return `<a class="back" href="#golpes">${ic('back')} Golpes</a><div class="card empty">Golpe não encontrado.</div>`;
+  pendingVideoFile=null;
+  const title=isEdit?'Editar golpe':'Novo golpe';
+  return `<a class="back" href="#golpes">${ic('back')} Golpes</a>
+  <div class="card">
+    <div class="eye">${isEdit?'Edição':'Cadastro'}</div>
+    <h1 style="font-size:2.2rem">${title}</h1>
+    <label>Número do golpe *</label>
+    <input type="number" id="g-num" min="1" step="1" value="${g?g.num:''}" placeholder="Ex: 1, 2, 3…">
+    <label>Nome do golpe *</label>
+    <input type="text" id="g-name" value="${g?escAttr(g.name):''}" placeholder="Ex: Oi Zuki, Mawashi Geri…">
+    <label>Descrição</label>
+    <textarea id="g-desc" placeholder="Como executar o golpe ou observações importantes">${g?esc(g.desc||''):''}</textarea>
+    <label>Vídeo do golpe</label>
+    <div class="file-row">
+      <button class="btn" type="button" data-a="pick-video">${ic('video')} ${g&&g.hasVideo?'Substituir vídeo':'Importar vídeo'}</button>
+      <input type="file" id="g-video" accept="video/*">
+      <span class="file-name" id="g-file-name">${g&&g.hasVideo?'Vídeo atual mantido (escolha outro para substituir)':'Nenhum vídeo selecionado'}</span>
+    </div>
+    <p class="mu" style="font-size:.8rem;margin-top:8px">O vídeo fica salvo no seu dispositivo (IndexedDB). Formatos comuns: MP4, WebM, MOV. Evite arquivos muito grandes.</p>
+    <div class="form-actions">
+      <button class="btn pri" data-a="golpe-save" data-id="${editId||''}">${isEdit?'Salvar alterações':'Salvar golpe'}</button>
+      <a class="btn" href="#golpes">Cancelar</a>
+    </div>
+  </div>`;
+}
+function golpeDetail(id){
+  const g=S.golpes.find(x=>x.id===id);
+  if(!g)return `<a class="back" href="#golpes">${ic('back')} Golpes</a><div class="card empty">Golpe não encontrado.</div>`;
+  const videoBlock=g.hasVideo
+    ?`<div class="video-wrap"><video id="golpe-video" controls playsinline preload="metadata"></video></div>`
+    :`<div class="card" style="margin:14px 0;padding:20px;text-align:center"><p class="mu">Nenhum vídeo cadastrado para este golpe.</p></div>`;
+  return `<a class="back" href="#golpes">${ic('back')} Golpes</a>
+  <div class="card">
+    <div class="eye">Golpe nº ${g.num}</div>
+    <div class="golpe-detail-num">${g.num}</div>
+    <h1 style="font-size:2.2rem;margin-bottom:12px">${esc(g.name)}</h1>
+    ${g.desc?`<p style="margin:0 0 8px;line-height:1.55">${esc(g.desc)}</p>`:'<p class="mu">Sem descrição.</p>'}
+    ${videoBlock}
+    <div class="form-actions">
+      <a class="btn" href="#golpe-edit-${g.id}">${ic('edit')} Editar</a>
+      <button class="btn danger" data-a="golpe-del" data-id="${g.id}">${ic('trash')} Excluir</button>
+    </div>
+  </div>`;
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function escAttr(s){return esc(s).replace(/'/g,'&#39;')}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+
+function showConfirm(msg,onYes){
+  const ov=document.createElement('div');
+  ov.className='confirm-ov';
+  ov.innerHTML=`<div class="confirm-box"><h3>Confirmar</h3><p>${esc(msg)}</p><div class="row"><button class="btn danger" id="cf-yes">Excluir</button><button class="btn" id="cf-no">Cancelar</button></div></div>`;
+  document.body.appendChild(ov);
+  ov.querySelector('#cf-yes').onclick=()=>{ov.remove();onYes()};
+  ov.querySelector('#cf-no').onclick=()=>ov.remove();
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove()});
+}
+
+async function saveGolpe(editId){
+  const numStr=document.getElementById('g-num').value.trim();
+  const name=document.getElementById('g-name').value.trim();
+  const desc=document.getElementById('g-desc').value.trim();
+  if(!numStr||!name){toast('Número e nome são obrigatórios');return}
+  const num=Number(numStr);
+  if(!Number.isFinite(num)||num<1||!Number.isInteger(num)){toast('Número deve ser um inteiro positivo');return}
+  const conflict=S.golpes.find(g=>Number(g.num)===num&&g.id!==editId);
+  if(conflict){toast('Já existe um golpe com o número '+num);return}
+
+  let id=editId;
+  let hasVideo=false;
+  if(editId){
+    const existing=S.golpes.find(x=>x.id===editId);
+    if(!existing){toast('Golpe não encontrado');return}
+    hasVideo=!!existing.hasVideo;
+  }else{
+    id=uid();
+  }
+
+  if(pendingVideoFile){
+    try{
+      await idbPut(id,pendingVideoFile);
+      hasVideo=true;
+      revokeVideoUrl(id);
+    }catch(err){
+      console.error(err);
+      toast('Não foi possível salvar o vídeo. Espaço insuficiente ou arquivo inválido.');
+      return;
+    }
+  }
+
+  if(editId){
+    const idx=S.golpes.findIndex(x=>x.id===editId);
+    S.golpes[idx]={...S.golpes[idx],num,name,desc,hasVideo};
+  }else{
+    S.golpes.push({id,num,name,desc,hasVideo,created:Date.now()});
+  }
+  save();
+  pendingVideoFile=null;
+  toast(editId?'Golpe atualizado ✓':'Golpe salvo ✓');
+  location.hash='#golpe-'+id;
+}
+
+async function deleteGolpe(id){
+  try{await idbDelete(id)}catch(e){}
+  revokeVideoUrl(id);
+  S.golpes=S.golpes.filter(g=>g.id!==id);
+  save();
+  toast('Golpe excluído');
+  location.hash='#golpes';
+}
+
+function celebrate(){
+  const o=document.createElement('div');o.className='ov';
+  o.innerHTML=`<div>${ic('flame')}<div class="big">DIA COMPLETO!</div><p>Três sessões concluídas. Ofensiva: <b>${stats().cur} ${stats().cur===1?'dia':'dias'}</b>.<br>Disciplina. Evolução. Vitória.</p><button class="btn" data-a="close">Continuar</button></div>`+Array.from({length:30},(_,i)=>`<span class="cf" style="left:${Math.random()*100}%;animation-delay:${Math.random()*2}s;background:${['#f5f5f6','#8d8d95','#d4d4d8'][i%3]}"></span>`).join('');
+  document.body.appendChild(o);
+}
+function stop(){if(T){clearInterval(T.iv);T=null}}
+function tick(){
+  T.left--;const e=document.getElementById('tm');if(e)e.textContent=mmss(T.left);
+  if(T.left<=0){const{k,i}=T;stop();try{navigator.vibrate&&navigator.vibrate(300)}catch(x){}
+    const t=today();if(inRange(t)){const a=S.ex[t+k]=S.ex[t+k]||[];if(!a.includes(i))a.push(i);save()}toast('Exercício concluído ✓');render()}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(!b)return;
+  const a=b.dataset.a,k=b.dataset.k,i=+b.dataset.i,t=today();
+  const r=location.hash.match(/^#sessao-([mtn])$/),sk=r&&r[1];
+  if(a==='ts'){stop();T={k:sk,i,left:getSes(sk,today()).ex[i][2],run:true,iv:setInterval(tick,1000)};render()}
+  else if(a==='tp'){if(T.run){clearInterval(T.iv);T.run=false}else{T.iv=setInterval(tick,1000);T.run=true}render()}
+  else if(a==='tx'){stop();render()}
+  else if(a==='ex'){if(!inRange(t))return;const l=S.ex[t+k]=S.ex[t+k]||[],x=l.indexOf(i);x<0?l.push(i):l.splice(x,1);save();render()}
+  else if(a==='fin'){if(!inRange(t)||(S.log[t]||{})[k])return;S.log[t]=S.log[t]||{};S.log[t][k]=Date.now();save();render();cnt(t)===3?celebrate():toast('Sessão concluída ✓ '+cnt(t)+'/3')}
+  else if(a==='close'){document.querySelector('.ov').remove()}
+  else if(a==='day'){SEL=b.dataset.d;render()}
+  else if(a==='th'){S.theme=b.dataset.v;save();render()}
+  else if(a==='psave'){const g=id=>document.getElementById(id).value.trim();const p={name:g('f-name'),mod:g('f-mod'),goal:g('f-goal'),start:g('f-start'),end:g('f-end'),champ:g('f-champ')};
+    if(!p.name||!p.start||!p.end||!p.champ||p.start>p.end||p.end>=p.champ){toast('Confira os campos e as datas');return}
+    S.p=p;SEL=null;save();toast('Perfil salvo ✓');render()}
+  else if(a==='wipe'){if(!rst){rst=true;render();setTimeout(()=>{rst=false;if(route()==='perfil')render()},4000)}else{rst=false;S.log={};S.ex={};save();toast('Registros apagados');render()}}
+  else if(a==='golpe-novo'){location.hash='#golpe-novo'}
+  else if(a==='golpe-open'){location.hash='#golpe-'+b.dataset.id}
+  else if(a==='pick-video'){document.getElementById('g-video').click()}
+  else if(a==='golpe-save'){saveGolpe(b.dataset.id||null)}
+  else if(a==='golpe-del'){
+    showConfirm('Excluir este golpe e o vídeo associado? Esta ação não pode ser desfeita.',()=>deleteGolpe(b.dataset.id));
+  }
+});
+document.addEventListener('change',e=>{
+  if(e.target&&e.target.id==='g-video'&&e.target.files&&e.target.files[0]){
+    const f=e.target.files[0];
+    if(!f.type.startsWith('video/')){toast('Selecione um arquivo de vídeo');e.target.value='';return}
+    if(f.size>120*1024*1024){toast('Vídeo muito grande (máx. ~120 MB recomendado)');e.target.value='';return}
+    pendingVideoFile=f;
+    const nameEl=document.getElementById('g-file-name');
+    if(nameEl)nameEl.textContent=f.name+' ('+Math.round(f.size/1024/1024*10)/10+' MB)';
+  }
+});
+window.addEventListener('hashchange',()=>{stop();pendingVideoFile=null;render();scrollTo(0,0)});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!T)render()});
+
+/* ===== ASSISTENTE EROS IA ===== */
+const AI_ENDPOINT_KEY='eros:ai:endpoint';
+const AI_HISTORY_KEY='eros:ai:history';
+let aiBusy=false;
+function aiEndpoint(){return (localStorage.getItem(AI_ENDPOINT_KEY)||'').trim()}
+function aiHistory(){try{return JSON.parse(localStorage.getItem(AI_HISTORY_KEY)||'[]')}catch(e){return []}}
+function aiSaveHistory(h){try{localStorage.setItem(AI_HISTORY_KEY,JSON.stringify(h.slice(-30)))}catch(e){}}
+function aiAddMessage(role,content){
+  const h=aiHistory();h.push({role,content:String(content||'')});aiSaveHistory(h);aiDrawMessages();
+}
+function aiDrawMessages(){
+  const box=document.getElementById('ai-messages');if(!box)return;
+  const h=aiHistory();
+  if(!h.length)box.innerHTML='<div class="ai-msg assistant">Oi! Eu sou o Eros IA. Posso ajudar a organizar seus treinos, marcar dias de folga e administrar sua biblioteca de golpes. O que você quer mudar?</div>';
+  else box.innerHTML=h.map(m=>`<div class="ai-msg ${m.role==='user'?'user':'assistant'}">${esc(m.content)}</div>`).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function aiToggle(open){
+  const panel=document.getElementById('ai-panel');if(!panel)return;
+  panel.hidden=!open;
+  if(open){aiDrawMessages();document.getElementById('ai-config-note').hidden=!!aiEndpoint();setTimeout(()=>document.getElementById('ai-input')?.focus(),80)}
+}
+function aiConfigure(){
+  const current=aiEndpoint();
+  const value=prompt('Cole o endereço completo do servidor Eros IA (terminando em /api/chat). Você vai receber esse endereço depois de publicar o backend.',current);
+  if(value===null)return;
+  const v=value.trim();
+  if(v&&!/^https:\/\/|^http:\/\/localhost/.test(v)){toast('Use um endereço HTTPS válido');return}
+  if(v)localStorage.setItem(AI_ENDPOINT_KEY,v.replace(/\/+$/,''));
+  else localStorage.removeItem(AI_ENDPOINT_KEY);
+  document.getElementById('ai-config-note').hidden=!!aiEndpoint();
+  toast(aiEndpoint()?'Conexão configurada':'Endereço removido');
+}
+function aiAppContext(){
+  const exerciseNames=[...new Set(Object.values(SES).flatMap(s=>s.ex.map(e=>e[0])))];
+  return {
+    today:today(),
+    weekday:new Date().toLocaleDateString('pt-BR',{weekday:'long'}),
+    profile:{name:S.p.name,modality:S.p.mod,goal:S.p.goal},
+    restDays:Object.keys(S.aiRestDays||{}).filter(d=>S.aiRestDays[d]),
+    sessionKeys:{m:'manhã 06:00',t:'tarde 13:00',n:'noite 20:00'},
+    todaySessions:KS.map(k=>({key:k,title:getSes(k,today()).t,description:getSes(k,today()).f,rest:isRestDay()})),
+    availableExerciseNames:exerciseNames,
+    golpes:(S.golpes||[]).map(g=>({num:g.num,name:g.name,description:g.desc||''}))
+  };
+}
+function aiNormalizeEndpoint(v){
+  let u=v.trim().replace(/\/+$/,'');
+  return u.endsWith('/api/chat')?u:u+'/api/chat';
+}
+async function aiApplyActions(actions){
+  const results=[];
+  for(const action of (actions||[]).slice(0,3)){
+    const a=action.name,args=action.arguments||{};
+    if(a==='set_day_rest'){
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(args.date||'')){results.push('Data inválida; nenhuma alteração feita.');continue}
+      S.aiRestDays=S.aiRestDays||{};
+      if(args.rest){S.aiRestDays[args.date]=true;results.push(`Dia ${dl(args.date,{day:'2-digit',month:'2-digit'})} marcado como folga.`)}
+      else{delete S.aiRestDays[args.date];results.push(`Folga removida de ${dl(args.date,{day:'2-digit',month:'2-digit'})}.`)}
+      save();
+    }else if(a==='set_session_plan'){
+      const date=args.date,session=args.session;
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(date||'')||!KS.includes(session)){results.push('Data ou horário inválido; nenhuma alteração feita.');continue}
+      const all=Object.values(SES).flatMap(s=>s.ex);
+      const requested=Array.isArray(args.exercise_names)?args.exercise_names:[];
+      const validNames=requested.map(n=>all.find(e=>e[0].toLocaleLowerCase('pt-BR')===String(n).toLocaleLowerCase('pt-BR'))).filter(Boolean).map(e=>e[0]);
+      S.aiSessionOverrides=S.aiSessionOverrides||{};
+      S.aiSessionOverrides[date]=S.aiSessionOverrides[date]||{};
+      S.aiSessionOverrides[date][session]={title:String(args.title||'').slice(0,90),description:String(args.description||'').slice(0,240),exerciseNames:[...new Set(validNames)]};
+      save();
+      results.push(`Sessão da ${({m:'manhã',t:'tarde',n:'noite'})[session]} em ${dl(date,{day:'2-digit',month:'2-digit'})} atualizada.`);
+    }else if(a==='add_golpe'){
+      const num=Number(args.num),name=String(args.name||'').trim();
+      if(!Number.isInteger(num)||num<1||!name){results.push('Para cadastrar, preciso de um número inteiro e um nome.');continue}
+      if(S.golpes.some(g=>Number(g.num)===num)){results.push(`Já existe um golpe com o número ${num}; nada foi alterado.`);continue}
+      S.golpes.push({id:uid(),num,name:name.slice(0,80),desc:String(args.description||'').slice(0,500),hasVideo:false,created:Date.now()});
+      S.golpes.sort((x,y)=>Number(x.num)-Number(y.num));save();
+      results.push(`Golpe ${num} — ${name} cadastrado. Para adicionar o vídeo, abra o cartão e use Editar.`);
+    }else if(a==='update_golpe'){
+      const g=S.golpes.find(x=>Number(x.num)===Number(args.num));
+      if(!g){results.push(`Não encontrei golpe com número ${args.num}.`);continue}
+      if(args.name)g.name=String(args.name).slice(0,80);
+      if(typeof args.description==='string')g.desc=args.description.slice(0,500);
+      save();results.push(`Golpe ${g.num} atualizado.`);
+    }else if(a==='delete_golpe'){
+      const g=S.golpes.find(x=>Number(x.num)===Number(args.num));
+      if(!g){results.push(`Não encontrei golpe com número ${args.num}.`);continue}
+      showConfirm(`Excluir o golpe ${g.num} — ${g.name} e o vídeo associado?`,()=>deleteGolpe(g.id));
+      results.push(`Aguardando sua confirmação para excluir o golpe ${g.num}.`);
+    }
+  }
+  render();
+  return results;
+}
+async function aiSend(textValue){
+  const input=document.getElementById('ai-input');
+  const message=(textValue??input?.value??'').trim();
+  if(!message||aiBusy)return;
+  const endpoint=aiEndpoint();
+  if(!endpoint){
+    aiAddMessage('system','Antes de conversar, configure o endereço do servidor Eros IA no botão ⚙. O servidor precisa estar publicado e com a chave Groq configurada.');
+    document.getElementById('ai-config-note').hidden=false;
+    return;
+  }
+  if(input)input.value='';
+  aiAddMessage('user',message);
+  aiBusy=true;
+  document.getElementById('ai-send').disabled=true;
+  document.getElementById('ai-typing').hidden=false;
+  try{
+    const history=aiHistory().filter(m=>m.role==='user'||m.role==='assistant').slice(-14);
+    const response=await fetch(aiNormalizeEndpoint(endpoint),{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:history,appState:aiAppContext()})
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(data.error||`Servidor respondeu ${response.status}`);
+    let reply=String(data.reply||'');
+    if(Array.isArray(data.actions)&&data.actions.length){
+      const results=await aiApplyActions(data.actions);
+      if(results.length)reply=(reply?reply+'\n\n':'')+results.join('\n');
+    }
+    aiAddMessage('assistant',reply||'Pronto! Atualizei o aplicativo.');
+  }catch(err){
+    aiAddMessage('assistant','Não consegui conectar ao servidor agora. Confira o endereço configurado e se o backend está publicado. Detalhe: '+(err.message||'erro de conexão'));
+  }finally{
+    aiBusy=false;
+    document.getElementById('ai-send').disabled=false;
+    document.getElementById('ai-typing').hidden=true;
+  }
+}
+document.getElementById('ai-fab')?.addEventListener('click',()=>aiToggle(true));
+document.getElementById('ai-close')?.addEventListener('click',()=>aiToggle(false));
+document.getElementById('ai-config')?.addEventListener('click',aiConfigure);
+document.getElementById('ai-config-inline')?.addEventListener('click',aiConfigure);
+document.getElementById('ai-form')?.addEventListener('submit',e=>{e.preventDefault();aiSend()});
+document.getElementById('ai-mic')?.addEventListener('click',()=>{
+  const Speech=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!Speech){toast('O reconhecimento de voz não está disponível neste navegador.');return}
+  const rec=new Speech();rec.lang='pt-BR';rec.interimResults=false;rec.maxAlternatives=1;
+  rec.onresult=e=>{const input=document.getElementById('ai-input');if(input)input.value=e.results[0][0].transcript};
+  rec.onerror=()=>toast('Não consegui ouvir. Confira a permissão do microfone.');
+  rec.start();
+});
+
+
+openIDB().catch(()=>{});
+render();
+</script>
+</body>
+</html>

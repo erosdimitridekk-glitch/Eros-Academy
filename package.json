@@ -1,0 +1,23 @@
+{
+  "name": "eros-academy-android-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Eros Academy com Eros IA e projeto Android via Capacitor",
+  "scripts": {
+    "android:init": "cap add android",
+    "android:sync": "cap sync android",
+    "android:open": "cap open android",
+    "android:apk": "cd android && gradlew.bat assembleDebug",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/core": "^8.6.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.2"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

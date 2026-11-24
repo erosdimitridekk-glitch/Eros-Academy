@@ -1,0 +1,3 @@
+Projeto Eros Academy + Eros IA.
+Leia README.md para configurar a Groq e gerar a APK.
+O ZIP contém o código-fonte; não contém uma APK compilada nem sua chave Groq.

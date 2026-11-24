@@ -1,0 +1,8 @@
+ANTES DE GERAR A APK
+[ ] Publicar o backend na Vercel
+[ ] Configurar GROQ_API_KEY nas variáveis de ambiente
+[ ] Fazer deploy e copiar a URL /api/chat
+[ ] Abrir o app e configurar a URL no botão ⚙ do Eros IA
+[ ] Instalar Node.js 24+ e Android Studio 2025.2.1+
+[ ] Executar BUILD-ANDROID.bat
+[ ] Gerar a APK pelo menu Build do Android Studio
